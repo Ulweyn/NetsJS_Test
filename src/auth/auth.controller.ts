@@ -46,7 +46,10 @@ export class AuthController {
 		status: 401,
 		description: "Unauthorized"
 	})
-	@UseGuards(LocalAuthGuard)
+	@ApiResponse({
+		status: 400,
+		description: "Invalid email"
+	})
 	@Post("login")
 	public async login(@Body() req: LoginDto): Promise<TokenInterface> {
 		return await this.authService.login(req);

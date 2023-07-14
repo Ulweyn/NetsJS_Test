@@ -5,6 +5,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { AuthModule } from "./auth/auth.module";
 import { APP_PIPE } from "@nestjs/core";
 import { ImageModule } from "./image/image.module";
+import { dataSourceOptions } from "./typeorm/data-source";
 
 @Module({
 	imports: [
@@ -12,19 +13,9 @@ import { ImageModule } from "./image/image.module";
 			envFilePath: ".env",
 		}),
 		UserModule,
-		TypeOrmModule.forRoot({
-			type: "mysql",
-			host: process.env.DB_HOST,
-			port: Number(process.env.MYSQL_PORT),
-			username: process.env.MYSQL_USER,
-			password: process.env.MYSQL_PASSWORD,
-			database: process.env.MYSQL_DATABASE,
-			autoLoadEntities: true,
-			synchronize: true,
-		}),
+		TypeOrmModule.forRoot(dataSourceOptions),
 		AuthModule,
 		ImageModule,
-
 	],
 	providers: [
 		{

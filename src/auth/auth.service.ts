@@ -9,7 +9,7 @@ import { ConfigService } from "@nestjs/config";
 import { MailService } from "../mail/mail.service";
 import * as bcrypt from "bcrypt";
 import { ChangePasswordDto } from "./dtos/change-password.dto";
-import TokenPayloadInterface from "./interfaces/tokenPayload.interface";
+import { TokenPayloadInterface } from "./interfaces/tokenPayload.interface";
 import { LoginDto } from "./dtos/login.dto";
 import { RegisterDto } from "./dtos/register.dto";
 import { UserService } from "src/user/user.service";
@@ -59,17 +59,14 @@ export class AuthService {
 	}
 
 	public async login(user: LoginDto): Promise<TokenInterface> {
-		try {
-			const loginUser = await this.userService.findByEmail(user.email);
-			if (!loginUser) {
-				throw new BadRequestException("Invalid email");
-			}
-			const { id, role } = loginUser;
-			const payload = { email: user.email, id: id, role: role };
-			return this.createToken(payload);
-		} catch (error) {
-			throw new Error(error);
+		const loginUser = await this.userService.findByEmail(user.email);
+		if (!loginUser) {
+			throw new BadRequestException("Invalid email");
 		}
+		const { id, role } = loginUser;
+		const payload = { email: user.email, id: id, role: role };
+		return this.createToken(payload);
+
 	}
 
 	public async register(dataValues: RegisterDto): Promise<TokenInterface> {
@@ -89,25 +86,22 @@ export class AuthService {
 	}
 
 	public async forgotPassword(forgotPasswordDto: ForgotPasswordDto): Promise<void> {
-		try {
-			const user = await this.userService.findByEmail(forgotPasswordDto.email);
-			if (!user) {
-				throw new BadRequestException("Invalid email");
-			}
-			const token = this.createToken({ email: user.email, id: user.id, role: user.role });
-			const forgotLink = `${this.clientAppUrl}/auth/forgotPassword?token=${token.access_token}`;
-			await this.mailService.send({
-				from: this.configService.get<string>("MAIL"),
-				to: user.email,
-				subject: "Forgot Password",
-				html: `
+		const user = await this.userService.findByEmail(forgotPasswordDto.email);
+		if (!user) {
+			throw new BadRequestException("Invalid email");
+		}
+		const token = this.createToken({ email: user.email, id: user.id, role: user.role });
+		const forgotLink = `${this.clientAppUrl}/auth/forgotPassword?token=${token.access_token}`;
+		await this.mailService.send({
+			from: this.configService.get<string>("MAIL"),
+			to: user.email,
+			subject: "Forgot Password",
+			html: `
                 <h3>Hello ${user.name}!</h3>
                 <p>Please use this <a href="${forgotLink}">link</a> to reset your password.</p>
             `,
-			});
-		} catch (error) {
-			throw new Error(error);
-		}
+		});
+
 	}
 
 	public async changePassword(

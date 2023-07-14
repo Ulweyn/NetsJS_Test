@@ -2,7 +2,7 @@ import { ExtractJwt, Strategy } from "passport-jwt";
 import { PassportStrategy } from "@nestjs/passport";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import ITokenPayloadInterface from "../interfaces/tokenPayload.interface";
+import { TokenPayloadInterface } from "../interfaces/tokenPayload.interface";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -14,7 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		});
 	}
 
-	async validate(payload: ITokenPayloadInterface) {
+	async validate(payload: TokenPayloadInterface) {
 		return { id: payload.id, email: payload.email, role: payload.role };
 	}
 }

@@ -6,5 +6,5 @@ export class ChangePasswordDto {
     @ApiProperty({example: "somepassword"})
     @IsString()
     @IsNotEmpty()
-	readonly password: string;
+	password: string;
 }
