@@ -7,7 +7,7 @@ import {
 	JoinColumn,
 	OneToOne
 } from "typeorm";
-import Image from "./image.entity";
+import { Image } from "./image.entity";
 import { Exclude } from "class-transformer";
 
 @Entity({ name: "users" })

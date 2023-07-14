@@ -17,5 +17,3 @@ export class Image {
 	)
 	user: User;
 }
-
-export default Image;
