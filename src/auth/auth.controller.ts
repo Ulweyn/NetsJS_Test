@@ -1,7 +1,6 @@
 import {
 	Body, Controller, Patch, Post, Request, UseGuards
 } from "@nestjs/common";
-import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
 import { AuthService } from "./auth.service";
 import { ForgotPasswordDto } from "./dtos/forgot-password.dto";
