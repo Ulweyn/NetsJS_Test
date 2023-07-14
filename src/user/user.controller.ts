@@ -121,9 +121,13 @@ export class UserController {
 		@Param("id") id: number, @Res() res: Response
 	): Promise<void> {
 		const image = await this.userService.getAvatar(id);
-		res.type("image/jpeg"); // Set the appropriate content type for your image
+		if (image) {
+			res.type("image/jpeg"); // Set the appropriate content type for your image
 
-		res.send(image.data);
+			res.send(image.data);
+		} else {
+			res.send(null);
+		}
 	}
 
 	@ApiOperation({ summary: "Delete avatar" })
