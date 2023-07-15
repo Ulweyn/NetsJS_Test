@@ -4,7 +4,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "../typeorm/entities/user.entity";
 import { UserController } from "./user.controller";
 import { ConfigModule } from "@nestjs/config";
-import { ImageModule } from "src/image/image.module";
+import { ImageModule } from "../image/image.module";
 import { MulterModule } from "@nestjs/platform-express";
 
 @Module({
