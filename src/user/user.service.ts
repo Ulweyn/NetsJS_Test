@@ -127,13 +127,14 @@ export class UserService {
 		return true;
 	}
 
-	public async getAvatar(id: number): Promise<Image | null> {
+	public async getAvatar(id: number): Promise<Buffer | null> {
 		const user = await this.findById(id);
 		if (!user) {
 			throw new NotFoundException("User not found");
 		}
 		if (user.image) {
-			return await this.imageService.getImageById(user.image.id);
+			const image = await this.imageService.getImageById(user.image.id);
+			return image.data;
 		}
 		return null;
 	}

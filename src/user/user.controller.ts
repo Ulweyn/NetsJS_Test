@@ -97,7 +97,7 @@ export class UserController {
 			},
 		},
 	})
-	@Post("setAvatar")
+	@Post("avatar")
 	public async setAvatar(
 		@UploadedFile() file: Express.Multer.File, @Request() req: RequestWithUser,
 	): Promise<boolean> {
@@ -121,13 +121,9 @@ export class UserController {
 		@Param("id") id: number, @Res() res: Response
 	): Promise<void> {
 		const image = await this.userService.getAvatar(id);
-		if (image) {
-			res.type("image/jpeg"); // Set the appropriate content type for your image
+		res.type("image/jpeg"); // Set the appropriate content type for your image
 
-			res.send(image.data);
-		} else {
-			res.send(null);
-		}
+		res.send(image);
 	}
 
 	@ApiOperation({ summary: "Delete avatar" })
