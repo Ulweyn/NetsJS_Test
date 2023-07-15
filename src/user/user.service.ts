@@ -4,7 +4,6 @@ import {
 } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { User } from "../typeorm/entities/user.entity";
-import { Image } from "../typeorm/entities/image.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserDto } from "./dtos/create-user.dto";
 import { UserInterface } from "../user/interfaces/user.interface";
