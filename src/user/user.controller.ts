@@ -5,7 +5,7 @@ import { Response } from "express";
 import { UserService } from "./user.service";
 import { Role } from "./enums/roles.enum";
 import { Roles } from "./decorators/roles.decorator";
-import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 import { UserInterface } from "./interfaces/user.interface";
 import { RequestWithUser } from "./interfaces/requestWithUser.interface";
 import { UpdateUserProfileByAdminDto } from "./dtos/update-user-profile-by-admin.dto";

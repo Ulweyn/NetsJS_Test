@@ -12,10 +12,10 @@ import { ChangePasswordDto } from "./dtos/change-password.dto";
 import { TokenPayloadInterface } from "./interfaces/tokenPayload.interface";
 import { LoginDto } from "./dtos/login.dto";
 import { RegisterDto } from "./dtos/register.dto";
-import { UserService } from "src/user/user.service";
+import { UserService } from "../user/user.service";
 import { UserInterface } from "../user/interfaces/user.interface";
 import { TokenInterface } from "../auth/interfaces/tokenInterface.interface";
-import { Helper } from "src/helper/helper";
+import { Helper } from "../helper/helper";
 
 @Injectable()
 export class AuthService {
