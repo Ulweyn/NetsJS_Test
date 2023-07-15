@@ -9,9 +9,9 @@ import { CreateUserDto } from "./dtos/create-user.dto";
 import { UserInterface } from "../user/interfaces/user.interface";
 import { UpdateUserDto } from "./dtos/update-user.dto";
 import { UpdateUserProfileByAdminDto } from "./dtos/update-user-profile-by-admin.dto";
-import { Helper } from "src/helper/helper";
+import { Helper } from "../helper/helper";
 import { ConfigService } from "@nestjs/config";
-import { ImageService } from "src/image/image.service";
+import { ImageService } from "../image/image.service";
 
 @Injectable()
 export class UserService {
@@ -105,7 +105,7 @@ export class UserService {
 
 	public async setAvatar(
 		id: number,
-		file: Express.Multer.File
+		file: Buffer
 	): Promise<boolean> {
 		const user = await this.findById(id);
 		if (!user) {

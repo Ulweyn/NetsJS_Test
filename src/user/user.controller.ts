@@ -103,7 +103,7 @@ export class UserController {
 	): Promise<boolean> {
 		return await this.userService.setAvatar(
 			req.user.id,
-			file
+			file.buffer
 		);
 	}
 

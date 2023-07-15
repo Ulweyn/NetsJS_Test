@@ -7,10 +7,10 @@ import { Repository } from "typeorm";
 export class ImageService {
 	constructor(@InjectRepository(Image) private imageRepository: Repository<Image>) { }
 
-	async uploadImage(imageData: Express.Multer.File): Promise<Image> {
+	async uploadImage(imageData: Buffer): Promise<Image> {
 		const image = new Image();
 		
-		image.data = Buffer.from(imageData.buffer);
+		image.data = Buffer.from(imageData);
 		return await this.imageRepository.save(image);
 	}
 
@@ -24,13 +24,13 @@ export class ImageService {
 
 	async updateImageById(
 		id: number,
-		imageData: Express.Multer.File
+		imageData: Buffer
 	): Promise<Image> {
 		const image = await this.getImageById(id);
 		if (!image) {
 			throw new NotFoundException("Image not found");
 		}
-		image.data = Buffer.from(imageData.buffer);
+		image.data = Buffer.from(imageData);
 
 		return await this.imageRepository.save(image);
 	}
