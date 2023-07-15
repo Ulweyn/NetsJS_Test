@@ -1,5 +1,5 @@
 
-import { Role } from "src/user/enums/roles.enum";
+import { Role } from "../../user/enums/roles.enum";
 import {
 	Entity,
 	Column,
