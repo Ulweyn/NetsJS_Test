@@ -50,6 +50,22 @@ $ npm run start:dev
 $ npm run migration:run
 
 ```
+## Docker run
+To run program with Docker run next command.
+
+```bash
+
+$ docker-compose up -d
+
+```
+
+Then inside container run migration
+
+```bash
+
+$ npm run migration:run
+
+```
 ## Swagger adress 
 Add /api to adress. Expample: 
 localhost:3000/api
